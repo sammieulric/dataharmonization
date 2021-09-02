@@ -1,0 +1,258 @@
+﻿@model IEnumerable<SCBHarmonization.Models.tbl_PreHarmonization>
+
+@{
+    ViewBag.Title = "GetTransaction";
+    Layout = "~/Views/Shared/_Layoutc.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    //(function ($) {
+    //    GetLastTransDate();
+    //})(jQuery);
+    $(function () {
+        GetLastTransDate();
+    });
+    function GetLastTransDate() {
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'Get',
+            url: "/WholeTransaction/GetLastTransDate",
+            success: function (data) {
+                $("#txtTextArea").html('');
+                var tdContent = '';
+                for (var i = 0; i < data.length; i++) {
+                    tdContent += '<option value="' + data[i].Id + '">' + data[i].TransDate + '</option>';
+                }
+                $("#txtTextArea").append(tdContent);
+                $("#txtTextArea").hide();
+                GetBodyValue();
+            },
+            error: function () {
+                alert("Error!")
+            }
+        });
+    }
+
+    function GetBodyValue() {
+        var textAreaValue = $("#txtTextArea option:selected").text();
+        $("#txtTransactionDate").text(textAreaValue);
+    }
+</script>
+<style>
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #202A44;
+        color: white;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Loaded Transactions Data</h2>
+        <h4>First 10 Records</h4>
+    </div>
+    <div class="col-md-6" style="margin-top: 57px; position: relative; left: 400px;">
+        @* <input type="text" name="transactionDate" id="txtTransactionDate"  />*@
+        <p style="font-size: 20px; font-weight:bold;">Last Uploaded Date: <span id="txtTransactionDate" style="font-size: 25px; font-weight:bold; color: #32a852"></span></p>
+    </div>
+</div>
+
+<table class="table">
+    <thead class="">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SrcAcctNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SrcInstCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SrcInstBranchCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SrcInstType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SrcInstUniqueID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestAcctNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestInstCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestInstBranchCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestInstType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestInstUniqueID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BankIncome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PsspParty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountClass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountDesignation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Channels)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionTypeCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PepDesignatedAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CypherSecurityLevyExempt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StampDutyExempt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalField)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inflow)
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SrcAcctNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SrcInstCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SrcInstBranchCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SrcInstType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SrcInstUniqueID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestAcctNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestInstCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestInstBranchCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestInstType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestInstUniqueID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankIncome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PsspParty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountDesignation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Channels)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionTypeCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PepDesignatedAccount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CypherSecurityLevyExempt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StampDutyExempt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalField)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inflow)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<select id="txtTextArea" class="form-control" style="width: 220px;">
+</select>
